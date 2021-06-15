@@ -13,7 +13,28 @@ function pad(number) {
         return String(number);
     }
 }
+/*
+function subtract_time(x_min, x_sec, x_hun, y_min, y_sec, y_hun) { //x subtracted from y
+    let res_hun = 0;
+    let res_sec = 0;
+    let res_min = 0;
+    if (y_hun >= x_hun) {
+        res_hun = y_hun - x_hun;
+    }
+    else {
+        res_hun = y_hun + 100 - x_hun;
+        y_sec --;
+    
+    if (y_sec >= x_sec) {
+        res_sec = y_sec - x_sec;
+    }
+    else {
+        res_sec = y_sec + 60 - x_sec;
+        y_min --;
 
+    res_min = y_min - x_min;
+}
+*/
 function count() {
     hundredth++;
 
@@ -52,7 +73,7 @@ function resetlap() {
         seconds = 0;
         hundredth = 0;
         document.getElementById("time").innerHTML = pad(minutes) + "." + pad(seconds) + "." + pad(hundredth);
-        document.getElementById("laps").innerHTML = null
+        document.getElementById("laps").innerHTML = null;
     }
     else { //record lap
         document.getElementById("laps").innerHTML += pad(minutes) + "." + pad(seconds) + "." + pad(hundredth) + "<br>";
