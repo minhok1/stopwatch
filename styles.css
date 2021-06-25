@@ -1,0 +1,85 @@
+body {
+    background-color: black;
+}
+
+h1 {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    text-align: center;
+}
+        
+#time {
+    font-size: x-large;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 20px;
+}
+        
+.buttons {
+    margin-bottom: 10px;
+}
+        
+#laps {
+    color: white;
+    margin: auto;
+    height: auto;
+    width: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: scroll;
+    border:none;
+    border-collapse: collapse;
+}
+
+#lapsscroll {
+    height: 150px;
+    width: 120px;
+    border: 2px solid;
+    overflow: auto;
+    text-align: center;
+    margin: 0 auto;
+}
+
+table tr {
+    border-collapse: collapse;
+    border-bottom: 1px solid #575757;
+    border-top: 1px solid #575757;
+}
+
+.minvalue {
+    color: green;
+}
+
+.maxvalue {
+    color: red;
+}
+
+#start_stop {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background-color: #808080;
+    color: white;
+}
+
+#reset_lap {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background-color: #808080;
+    color: white;
+}
+
+.btn_start {
+    background-color: green;
+    color: rgb(0, 196, 0);
+}
+
+.btn_stop {
+    background-color: red;
+    color: rgb(255, 97, 97);
+}

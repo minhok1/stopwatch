@@ -1,81 +1,99 @@
-let minutes = 0;
-let seconds = 0;
-let hundredth = 0;
-
 let status = "stopped";
-let runtime = null;
+let starttime = null; //start time of the current run
+let elapsedtime = 0; //sum total of all the runs
+let previouslap = "00.00.00";
+let displayedtime;
 
-function pad(number) {
-    if (number < 10) {
-        return "0" + String(number);
-    }
-    else {
-        return String(number);
-    }
-}
-/*
-function subtract_time(x_min, x_sec, x_hun, y_min, y_sec, y_hun) { //x subtracted from y
-    let res_hun = 0;
-    let res_sec = 0;
-    let res_min = 0;
-    if (y_hun >= x_hun) {
-        res_hun = y_hun - x_hun;
-    }
-    else {
-        res_hun = y_hun + 100 - x_hun;
-        y_sec --;
-    
-    if (y_sec >= x_sec) {
-        res_sec = y_sec - x_sec;
-    }
-    else {
-        res_sec = y_sec + 60 - x_sec;
-        y_min --;
+import {convertTime} from "./convertTime.js";
+import {subtractTime} from "./subtractTime.js";
 
-    res_min = y_min - x_min;
-}
-*/
-function count() {
-    hundredth++;
+var btnstartstop = document.getElementById("start_stop");
+var btnresetlap = document.getElementById("reset_lap");
+var timedisplay = document.getElementById("time");
+var laptable = document.getElementById("laps");
 
-    if (hundredth == 100) {
-        hundredth = 0;
-        seconds++;
+let token = undefined;
+let newlap;
+let laptime;
+let laparray = [];
+let minlap;
+let maxlap;
 
-        if (seconds == 60) {
-            seconds = 0;
-            minutes++;
-        }
 
-    }
-    
-    document.getElementById("time").innerHTML = pad(minutes) + "." + pad(seconds) + "." + pad(hundredth);
+function refresh() {
+    timedisplay.innerHTML = convertTime(Date.now() - starttime + elapsedtime);
+    token = requestAnimationFrame(refresh);
 }
 
-function startstop() {
-    if  (status == "stopped") {
-        runtime = window.setInterval(count, 10);
+btnstartstop.onclick = function startstop() {
+    if  (status === "stopped") { //start
         status = "running";
-        document.getElementById("start_stop").innerHTML = "Stop";
-        document.getElementById("reset_lap").innerHTML = "Lap";
+        btnstartstop.innerHTML = "stop";
+        btnstartstop.classList.add('btn_stop');
+        btnresetlap.innerHTML = "lap";
+        starttime = Date.now();
+        refresh();
     }
-    else {
-        window.clearInterval(runtime);
+    else { //stop
         status = "stopped";
-        document.getElementById("start_stop").innerHTML = "Start";
-        document.getElementById("reset_lap").innerHTML = "Reset";
+        btnstartstop.innerHTML = "start";
+        btnstartstop.classList.add('btn_start');
+        btnresetlap.innerHTML = "reset";
+        cancelAnimationFrame(token);
+        elapsedtime += Date.now() - starttime;
     }
 }
  
-function resetlap() {
-    if  (status == "stopped") { //reset
-        minutes = 0;
-        seconds = 0;
-        hundredth = 0;
-        document.getElementById("time").innerHTML = pad(minutes) + "." + pad(seconds) + "." + pad(hundredth);
-        document.getElementById("laps").innerHTML = null;
+btnresetlap.onclick = function resetlap() {
+    if  (status === "stopped") { //reset
+        starttime = null;
+        elapsedtime = 0;
+        previouslap = "00.00.00";
+        timedisplay.innerHTML = "00.00.00";
+        laptable.innerHTML = null;
+        maxlap=0;
+        minlap=0;
+        laparray=[];
+        btnstartstop.classList.remove('btn_start');
+        btnstartstop.classList.remove('btn_stop');
     }
     else { //record lap
-        document.getElementById("laps").innerHTML += pad(minutes) + "." + pad(seconds) + "." + pad(hundredth) + "<br>";
+        displayedtime = document.getElementById("time").textContent;
+        [laptime, newlap] = subtractTime(previouslap, displayedtime);
+        previouslap = displayedtime;
+        var row = laptable.insertRow(-1);
+        var cell = row.insertCell(0);
+
+        cell.innerHTML = newlap;
+        laparray.push(laptime);
+
+        if (laparray.length ===1) {
+            maxlap = 0;
+            minlap = 0;
+        }
+
+        else if (laparray.length === 2) {
+            if (laparray[0] > laparray[1]) {
+                minlap = 1;
+            }
+            else {
+                maxlap = 1;
+            }
+            laptable.rows[maxlap].cells[0].classList.add('maxvalue')
+            laptable.rows[minlap].cells[0].classList.add('minvalue')
+        }
+
+        else {
+            if (laparray[laparray.length-1] > laparray[maxlap]) {
+                laptable.rows[maxlap].cells[0].classList.remove('maxvalue');
+                maxlap = laparray.length - 1;
+                laptable.rows[maxlap].cells[0].classList.add('maxvalue')
+            }
+            else if (laparray[laparray.length-1] < laparray[minlap]) {
+                laptable.rows[minlap].cells[0].classList.remove('minvalue');
+                minlap = laparray.length - 1;
+                laptable.rows[minlap].cells[0].classList.add('minvalue')
+            }
+        }
     }
 }
