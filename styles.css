@@ -73,13 +73,3 @@ table tr {
     background-color: #808080;
     color: white;
 }
-
-.btn_start {
-    background-color: green;
-    color: rgb(0, 196, 0);
-}
-
-.btn_stop {
-    background-color: red;
-    color: rgb(255, 97, 97);
-}

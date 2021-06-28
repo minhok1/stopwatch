@@ -29,7 +29,8 @@ btnstartstop.onclick = function startstop() {
     if  (status === "stopped") { //start
         status = "running";
         btnstartstop.innerHTML = "stop";
-        btnstartstop.classList.add('btn_stop');
+        btnstartstop.style.backgroundColor = "red";
+        btnstartstop.style.color = "rgb(255, 180, 200)";
         btnresetlap.innerHTML = "lap";
         starttime = Date.now();
         refresh();
@@ -37,7 +38,8 @@ btnstartstop.onclick = function startstop() {
     else { //stop
         status = "stopped";
         btnstartstop.innerHTML = "start";
-        btnstartstop.classList.add('btn_start');
+        btnstartstop.style.backgroundColor = "green";
+        btnstartstop.style.color = "rgb(0, 255, 0)";
         btnresetlap.innerHTML = "reset";
         cancelAnimationFrame(token);
         elapsedtime += Date.now() - starttime;
@@ -54,8 +56,8 @@ btnresetlap.onclick = function resetlap() {
         maxlap=0;
         minlap=0;
         laparray=[];
-        btnstartstop.classList.remove('btn_start');
-        btnstartstop.classList.remove('btn_stop');
+        btnstartstop.style.backgroundColor = "#808080";
+        btnstartstop.style.color = "white";
     }
     else { //record lap
         displayedtime = document.getElementById("time").textContent;
