@@ -32,7 +32,7 @@ h1 {
     border-collapse: collapse;
 }
 
-#lapsscroll {
+#lap-container {
     height: 150px;
     width: 250px;
     border: 2px solid;

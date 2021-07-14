@@ -1,0 +1,96 @@
+.container {
+  text-align: center;
+  background-color: black;
+  height: 100vh;
+  font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  padding-top: 100px;
+}
+
+.time {
+  color: white;
+  height: 120px;
+  font-size: 50px;
+  font-weight: 100;
+}
+
+button {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 3px black;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+button.start{
+  color: rgb(105,207,105);
+  background-color: rgb(19,41,20);
+  border: 3px solid rgb(19,41,20);
+}
+
+button.stop {
+  color: rgb(230,84,68);
+  background-color: rgb(47,16,13);
+  border: 3px solid rgb(47,16,13);
+}
+
+button.reset-lap {
+  color: rgb(254,254,254);
+  background-color: rgb(51,51,51);
+  border: 3px solid rgb(51,51,51);
+}
+
+button.disabled {
+  color: rgb(152,149,154);
+  background-color: rgb(31,28,33);
+  border: 3px solid rgb(31,28,33);
+}
+
+ul {
+  list-style-type: none;
+  color: white;
+  margin-top: 20px;
+  padding-left: 0px;
+  width: 215px;
+  margin-left: auto;
+  margin-right:auto;
+  height: 259px;
+  overflow-y: auto;
+}
+
+ul::-webkit-scrollbar {
+  width: 3px;
+}
+ 
+ul::-webkit-scrollbar-thumb {
+  background-color: rgb(120,120,120);
+  width: 2px;
+  border-radius: 2px;
+  visibility: hidden;
+}
+ul:hover::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+li {
+  padding-top: 12px;
+  padding-bottom:12px;
+  border-bottom: 1px solid rgb(24,24,24);
+}
+
+li:first-child {
+  border-top: 1px solid rgb(24,24,24);
+}
+
+.min-value {
+  color: green;
+}
+
+.max-value {
+  color: red;
+}
+
+span {
+  margin-left: 100px;
+}

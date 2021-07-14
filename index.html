@@ -8,31 +8,25 @@
     <title>
         Stopwatch
     </title>
-
-    </script>
 </head>
 
 <body>
     <h1>Stopwatch</h1>
     <div class="container">
         <div id="time">
-            00.00.00
+            00:00.00
         </div>
 
         <div class="buttons">
-            <button id="start_stop">Start</button>
-            &nbsp;
             <button id="reset_lap">Reset</button>
+            <button id="start_stop">Start</button>
         </div>
-        <div id="lapsscroll">
+        <div id="lap-container">
             <table id="laps"></table>
         </div>
     </div>
 
     <script type="module" src="script.js"></script>
-    <script type="module" src="convertTime.js"></script>
-    <script type="module" src="subtractTime.js"></script>
-
 </body>
 
 </html>

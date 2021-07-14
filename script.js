@@ -7,9 +7,9 @@ const timeDisplay = document.getElementById("time");
 const lapTable = document.getElementById("laps");
 
 let status = "stopped";
-let starttime = null; //start time of the current run
-let elapsedtime = 0; //sum total of all the runs
-let previouslap = "00.00.00";
+let startTime = null; //start time of the current run
+let elapsedTime = 0; //sum total of all the runs
+let previousLap = "00.00.00";
 let displayedtime;
 let token = undefined;
 let newlap;
@@ -18,9 +18,8 @@ let laparray = [];
 let minlap;
 let maxlap;
 
-
 function updateTime() {
-    timeDisplay.innerHTML = convertTime(Date.now() - starttime + elapsedtime);
+    timeDisplay.innerHTML = convertTime(Date.now() - startTime + elapsedTime);
     token = requestAnimationFrame(updateTime);
 }
 
@@ -32,7 +31,7 @@ btnStartStop.onclick = function startstop() {
         btnStartStop.style.backgroundColor = "rgb(100,30,30)";
         btnStartStop.style.color = "rgb(250, 50, 50)";
         btnResetLap.innerHTML = "lap";
-        starttime = Date.now();
+        startTime = Date.now();
         updateTime();
     }
 
@@ -43,16 +42,16 @@ btnStartStop.onclick = function startstop() {
         btnStartStop.style.color = "rgb(100,200,100)";
         btnResetLap.innerHTML = "reset";
         cancelAnimationFrame(token);
-        elapsedtime += Date.now() - starttime;
+        elapsedTime += Date.now() - startTime;
     }
 }
  
 btnResetLap.onclick = function resetlap() {
 
     if  (status === "stopped") { //reset
-        starttime = null;
-        elapsedtime = 0;
-        previouslap = "00.00.00";
+        startTime = null;
+        elapsedTime = 0;
+        previousLap = "00.00.00";
         timeDisplay.innerHTML = "00.00.00";
         lapTable.innerHTML = null;
         maxlap=0;
@@ -64,10 +63,10 @@ btnResetLap.onclick = function resetlap() {
     
     else { //record lap
         displayedtime = document.getElementById("time").textContent;
-        [laptime, newlap] = subtractTime(previouslap, displayedtime);
-        previouslap = displayedtime;
-        var row = lapTable.insertRow(-1);
-        var cell = row.insertCell(0);
+        [laptime, newlap] = subtractTime(previousLap, displayedtime);
+        previousLap = displayedtime;
+        row = lapTable.insertRow(-1);
+        cell = row.insertCell(0);
 
         cell.innerHTML = newlap;
         laparray.push(laptime);

@@ -1,4 +1,4 @@
-export function string_pad(unpad_time) {
+function string_pad(unpad_time) {
     let str = unpad_time.toString(10);
     if (str.length === 1) {
         return "0" + str;

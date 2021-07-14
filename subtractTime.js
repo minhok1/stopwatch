@@ -1,8 +1,12 @@
 import {string_pad} from "./convertTime.js";
 
+//convert previous and next times in the format of 00.00.00 into miliseconds and subtract one from another to r
+
 export function subtractTime(prev, next) { //both in "00.00.00"
 
-    let res_hun, res_sec, res_min
+    let hundreds
+    let seconds
+    let minutes
 
     let [prev_min, prev_sec, prev_hun] = prev.split('.').map(function(item) {
         return parseInt(item, 10);
@@ -17,10 +21,15 @@ export function subtractTime(prev, next) { //both in "00.00.00"
 
     let subresult = next_total - prev_total;
 
-    res_min = Math.floor(subresult/6000);
-    res_sec = Math.floor((subresult % 6000)/100);
-    res_hun = subresult % 100;
+    let __return;
+    ({ __return, minutes, seconds, hundreds } = formatTime(minutes, subresult, seconds, hundreds));
+    return __return;
 
-    return [subresult, `${string_pad(res_min)}.${string_pad(res_sec)}.${string_pad(res_hun)}`];
+}
 
+function formatTime(minutes, subresult, seconds, hundreds) {
+    minutes = Math.floor(subresult / 6000);
+    seconds = Math.floor((subresult % 6000) / 100);
+    hundreds = subresult % 100;
+    return { __return: [subresult, `${string_pad(minutes)}.${string_pad(seconds)}.${string_pad(hundreds)}`], minutes, seconds, hundreds };
 }
