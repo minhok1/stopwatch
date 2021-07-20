@@ -29,12 +29,11 @@ export default function Stopwatch() {
   })
 
   useEffect( () => {
-    let intervalToken
     if (startTime) {
-      intervalToken = setInterval(() => setCurrentTime(Date.now() - startTime + elapsedTime), 10)
-    }
-    return function cleanUp() {
-      clearInterval(intervalToken)
+      const intervalToken = setInterval(() => setCurrentTime(Date.now() - startTime + elapsedTime), 10)
+      return function cleanUp() {
+        clearInterval(intervalToken)
+      }
     }
   }) 
 
@@ -90,7 +89,7 @@ export default function Stopwatch() {
   const onStartStopButtonClick = startTime ? stopTimer : startTimer
   const onResetLapButtonClick = startTime ? recordLaps : resetTimer
   const startStopButtonText = startTime ? 'Stop' : 'Start'
-  const resetLapButtonText = startTime || !currentTime ? 'lap' : 'reset'
+  const resetLapButtonText = startTime || !currentTime ? 'Lap' : 'Reset'
   const startStopButtonColour = startTime ? 'stop' : 'start'
   const resetLapButtonColour = currentTime ? 'reset-lap' : 'disabled'
 
